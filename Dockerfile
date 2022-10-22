@@ -1,4 +1,6 @@
-FROM https://gitlab.fit.cvut.cz:5000/hejdamax/ni-vmm-semestralka/base:latest
+FROM gitlab.fit.cvut.cz:5000/hejdamax/ni-vmm-semestralka/base:latest
+
+EXPOSE 5000
 
 RUN apt update
 
