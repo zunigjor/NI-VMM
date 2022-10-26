@@ -1,15 +1,14 @@
+from flask import render_template
 from flask import Flask
-app = Flask(__name__)
+from views.images.images import Images
 
+
+app = Flask(__name__)
+app.add_url_rule('/images', view_func=Images.as_view('images'))
 
 @app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
-
-@app.route('/<user>')
-def hello_user(user):  # put application's code here
-    return f'Hello {user}'
+def index():
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
