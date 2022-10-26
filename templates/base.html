@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+        <div class="container-fluid d-flex flex-column p-0"><a
+                class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-icon rotate-n-15"></div>
+            <div class="sidebar-brand-text mx-3"><span>NI-VMM</span></div>
+        </a>
+            <hr class="sidebar-divider my-0">
+            <ul class="navbar-nav text-light" id="accordionSidebar">
+                <li class="nav-item"><a class="nav-link active" href="{{ url_for('query') }}"><span>Query images</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('imageUpload') }}">Upload
+                    Image<span></span></a></li>
+                 <li class="nav-item"><a class="nav-link" href="{{ url_for('imageList') }}">List
+                    Images in DB<span></span></a></li>
+                <li class="nav-item"><a class="nav-link" href="table.html">View Image database</a></li>
+            </ul>
+            <div class="text-center d-none d-md-inline"></div>
+        </div>
+    </nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav class="navbar navbar-light navbar-expand bg-white shadow d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center mb-4 topbar static-top">
+                <div class="container-fluid">
+                    <button class="btn navbar-toggler-icon" id="sidebarToggle" type="button"></button>
+                    <h1 style="padding-left: 0px;">NI-VMM Semestralka</h1>
+                </div>
+            </nav>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                <div class="container-fluid">
+                    <div class="toast-container position-absolute top-3 end-0 p-3">
+                        {% for category, messsage in messages %}
+                            <div class="toast text-white bg-{{ category }} border-0" role="alert" aria-live="assertive"
+                                 aria-atomic="true" data-bs-delay="2000" data-bs-autohide="true">
+                            <div class="toast-body">
+                                {{ messsage }}
+                            </div>
+
+                        {% endfor %}
+                        </div>
+                    </div>
+
+         {% endwith %}
+                {% block content %}{% endblock %}
+        </div>
+    </div>
+    <footer class="bg-white sticky-footer"></footer>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src={{ url_for('static', filename='js/theme.js') }}></script>
+</body>
+
+</html>

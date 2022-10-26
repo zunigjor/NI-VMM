@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+                        <div class="card">
+                        <div class="card-header">
+                            <div></div>
+                            <h1>{% block title %}Image Query{% endblock %}</h1>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <div class="col">
+                                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="switchInput"><label class="form-check-label" for="formCheck-1">query with url</label></div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <div><input class="form-control" type="file" id="fileUpload"><input class="form-control" type="url" id="url" placeholder="URL" style="display: none;"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><button class="btn btn-primary" type="button">Button</button></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+{% endblock %}
