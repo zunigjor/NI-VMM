@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% set active_page = active_page|default('listImg') -%}
+{% block content %}
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; width: 60%">
+        {% for image in images.all() %}
+            <div style="display: grid; grid-template-columns: 1fr; grid-template-rows: 300px 40px">
+            <div>
+                <div>
+                        {% if image.type.value == 'URL' %}
+                            <img class=".img-thumbnail" src="{{ image.url }}"
+                                 style="width:100%; height: 100%; object-fit: scale-down">
+                        {% else %}
+                            <img class=".img-thumbnail" src="{{ image.path }}"
+                                 style="width:100%; height: 100%; object-fit: scale-down">
+                        {% endif %}
+                </div>
+            </div>
+            <div>
+                    <div class="card" >
+                        <h5 class="card-header" >
+                            <a class="collapsed" data-bs-toggle="collapse" href="#collapse-collapsed-{{ loop.index }}"
+                               aria-expanded="true" aria-controls="collapse-collapsed" id="heading-collapsed">
+                                <i class="fa fa-chevron-down pull-right"></i>
+                                Descriptors
+                            </a>
+                        </h5>
+                        <div id="collapse-collapsed-{{ loop.index }}" class="collapse"
+                             aria-labelledby="heading-collapsed" style="z-index: 100">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    {% for descriptor in image.descriptors %}
+                                        <li class="list-group-item">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <a class="collapsed" data-bs-toggle="collapse"
+                                                       href="#collapse-descriptor-{{ loop.index }}"
+                                                       aria-expanded="true" aria-controls="collapse-descriptor"
+                                                       id="heading-descriptor">
+                                                        <i class="fa fa-chevron-down pull-right"></i>
+                                                        <bold>descriptor {{ loop.index }}</bold>
+                                                    </a>
+                                                </div>
+                                                <div id="collapse-descriptor-{{ loop.index }}" class="collapse"
+                                                     aria-labelledby="heading-collapsed">
+                                                    <ul class="list-group list-group-flush">
+                                                        {% for d in descriptor %}
+                                                            <li class="list-group-item">
+                                                                <small>
+                                                                    {{ d }}
+                                                                </small>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

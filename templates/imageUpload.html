@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% set active_page = active_page|default('uploadImg') -%}
+{% block content %}
+    <style>
+    #url {
+        display: none;
+        width: 100%;
+    }
+    </style>
+                        <div class="card">
+                        <div class="card-header">
+                            <div></div>
+                            <h1>{% block title %}Upload Image{% endblock %}</h1>
+                        </div>
+                        <div class="card-body">
+                            Insert a image into the image database. Files have to be in jpg or png format.
+                            <form method="POST" enctype="multipart/form-data" action="">
+                            {% if errors %}
+                                {% for error in errors %}
+                                <p>{{ errors[error].message }}
+                                {% endfor %}
+                            {% endif %}
+                            {{ form.csrf_token }}
+                             <div class="row" style="margin-bottom: 10px;">
+                                    <div class="col">
+                                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="switchUpload"><label class="form-check-label" for="formCheck-1">upload with url</label></div>
+                                    </div>
+                                </div>
+                                <div class="Row" style="margin-bottom: 10px;">
+                                    <div class="col">
+                                        {{ form.url(placeholder="URL") }}
+                                        {% if form.url.errors %}
+                                            <ul>
+                                                {% for error in form.url.errors %}
+                                                    <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                                <div class="Row" style="margin-bottom: 10px;">
+                                    <div class="col">
+                                        {{ form.file }}
+                                        {% if form.file.errors %}
+                                            <ul>
+                                                {% for error in form.file.errors %}
+                                                    <li>{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                                <div class="Row">
+                                    <div class="col">
+                                        <input type="submit"  class="btn btn-success text-white" value="Insert image into database">
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        </div>
+{% endblock %}
